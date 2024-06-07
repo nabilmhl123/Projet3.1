@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Formulaire</title>
+</head>
+
+<body>
+    <header>
+        <div class="en-tete">
+            <div class="onglets">
+                <p><a href="index.html#portfolio">projets</a></p>
+                <p><a href="index.html#contact">contact</a></p>
+                <p>login</p>
+                <p><i class="fa-brands fa-instagram"></i></p>
+            </div>
+        </div>
+    </header>
+    <div class="log-in">
+        <form id="loginForm" action="#">
+            <h2>Log in</h2>
+            <div class="input-box">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" value="sophie.bluel@test.tld"
+                    placeholder="Entrez votre e-mail" required autocomplete="username">
+            </div>
+            <div class="input-box">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" value="S0phie" name="password"
+                    placeholder="Entrez votre mot de passe" required autocomplete="current-password">
+            </div>
+            <div class="connexion">
+                <input type="submit" id="soumettre" value="Se connecter">
+                <p class="forgot-password"><a href="#">Mot de passe oublié ?</a></p>
+            </div>
+        </form>
+        <p id="errorMessage" class="error-message"></p>
+    </div>
+
+</body>
+<script src="login.js"></script>
+
+
+</html>

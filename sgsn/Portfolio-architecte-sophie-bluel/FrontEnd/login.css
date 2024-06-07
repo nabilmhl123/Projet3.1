@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+SC&family=Lobster&family=Pacifico&family=Rubik+Moonrocks&family=Syne+Mono&family=Syne:wght@400..800&display=swap');
+
+
+
+
+body{
+    padding: 0 50px;
+    background-color: #FFFEF8;
+    font: inherit;
+}
+
+form{
+    align-content: center;
+}
+
+
+
+h2{
+    font-family: "Syne";
+    font-weight: 700;
+    font-style: normal;
+    size: 30px;
+    color: #1D6154;
+}
+
+.onglets{
+    display: flex;
+    justify-content: right;
+}
+
+.onglets p {
+    margin: 10px;
+}
+
+.log-in{
+    text-align: center;
+    margin: 50px;
+}
+
+.connexion p {
+    text-decoration: underline;
+}
+
+.input-box{
+    display: flex;
+    flex-direction: column;
+    margin: 50px;
+    align-items: center;
+}
+
+
+.input-box input{
+    width: 379px;
+    height: 51px;
+    border: none;
+    box-shadow: 1px 1px 1px 1px gainsboro;
+}
+
+.connexion input{
+    width: 179px;
+    height: 36px;
+    border-radius: 60px;
+    background-color: #1D6154;
+    color: white;
+    border: none;
+    font: "syne";
+    cursor: pointer;
+}
+
+a{
+    text-decoration: none;
+}
