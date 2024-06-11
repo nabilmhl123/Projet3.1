@@ -142,7 +142,7 @@ secondCloseModalBtn.addEventListener('click', function () {
 function displayModalImages(projects) {
     const modalContent = document.querySelector('.modal .modal-content');
     if (modalContent) {
-        clearArea(modalContent);
+        modalContent.innerHTML = ''; // Vider le contenu précédent
         projects.forEach(project => {
             const imgContainer = document.createElement("div");
             imgContainer.classList.add("img-container");
@@ -150,12 +150,14 @@ function displayModalImages(projects) {
 
             const img = document.createElement("img");
             img.src = project.imageUrl;
+            img.alt = project.title || 'Image';
+
+            imgContainer.appendChild(img);
 
             const deleteIcon = document.createElement("i");
             deleteIcon.classList.add("fa", "fa-trash");
             deleteIcon.dataset.imageId = project.id;
 
-            imgContainer.appendChild(img);
             imgContainer.appendChild(deleteIcon);
             modalContent.appendChild(imgContainer);
         });
@@ -247,6 +249,7 @@ async function createNewWork(categoryValue, file, titleValue) {
         });
 
         console.log('Response status:', response.status); // Log du statut de la réponse
+        closeModal(modalContainer); // Fermer la modale après l'ajout réussi
         return response;
     } catch (error) {
         console.error("Une erreur s'est produite lors de la création du travail :", error);
