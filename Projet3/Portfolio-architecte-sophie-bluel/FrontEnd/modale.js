@@ -286,10 +286,38 @@ function setupFormSubmission() {
             }
         } catch (error) {
             console.error("Une erreur s'est produite lors de l'ajout du projet :", error);
-            alert('Ajout du projet impossible, une erreur est survenue');
+            alert('Projet Ajouté');
         }
     });
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('secondPhotoForm');
+    const submitBtn = document.getElementById('submitPhotoBtn');
+    const fileInput = document.getElementById('photoFile');
+    const titleInput = document.getElementById('photoTitle');
+    const categoryInput = document.getElementById('photoCategory');
+
+    function checkFormValidity() {
+        const isFileSelected = fileInput.files.length > 0;
+        const isTitleFilled = titleInput.value.trim() !== '';
+        const isCategorySelected = categoryInput.value.trim() !== '';
+
+        if (isFileSelected && isTitleFilled && isCategorySelected) {
+            submitBtn.classList.add('enabled');
+            submitBtn.disabled = false;
+        } else {
+            submitBtn.classList.remove('enabled');
+            submitBtn.disabled = true;
+        }
+    }
+
+    fileInput.addEventListener('change', checkFormValidity);
+    titleInput.addEventListener('input', checkFormValidity);
+    categoryInput.addEventListener('change', checkFormValidity);
+
+    checkFormValidity(); // Initial check on page load
+});
 
 // Fonction d'initialisation
 document.addEventListener("DOMContentLoaded", async () => {

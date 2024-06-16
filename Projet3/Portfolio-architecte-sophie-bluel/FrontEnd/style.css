@@ -177,7 +177,7 @@ h2{
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
-	color: #1D6154
+	color: #070707
 }
 
 h3{
@@ -531,15 +531,20 @@ form #submitPhotoBtn {
     margin-top: 20px; /* Espacement en haut */
     margin-bottom: 20px; /* Espacement en bas */
     padding: 10px 20px;
-    background-color: #1D6154;
+    background-color: grey; /* Couleur grise initiale */
     color: #fff;
     border: none;
     border-radius: 5px;
     font-size: 16px;
-    cursor: pointer;
+    cursor: not-allowed; /* Curseur désactivé */
+}
+
+form #submitPhotoBtn.enabled {
+    background-color: #1D6154; /* Couleur verte */
+    cursor: pointer; /* Curseur activé */
 }
 
 /* Style lorsque le bouton Valider est survolé */
-form #submitPhotoBtn:hover {
+form #submitPhotoBtn.enabled:hover {
     background-color: #1D6154;
 }
