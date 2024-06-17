@@ -59,17 +59,9 @@
 			</article>
 		</section>
 		<section id="portfolio">
-			<h2>Mes Projets</h2>
+			<h2>Mes Projets</h2><button class="modal-btn modal-trigger"><i class="fa-solid fa-pen-to-square"></i>Modifier</button>
 			<div class="categories">
-				<a href="#">
-					<div class="filtre-button">
-						<div id="tous">Tous</div>
-						<div id="objets">Objets</div>
-						<div id="appartements">Appartements</div>
-						<div id="hotel">Hotels et Restaurant</div>
-						<button class="modal-btn modal-trigger"><i class="fa-solid fa-pen-to-square"></i>Modifier</button>
-					</div>
-				</a>
+				
 			</div>
 
 			<div class="gallery">
@@ -103,23 +95,31 @@
         <button class="close-modal modal-trigger">X</button>
         <h3>Ajout photo</h3>
         <div class="modal-content2">
-            <form action="#" method="POST" id="secondPhotoForm">
-                <input type="file" id="photoFile" name="photoFile"><br>
-
-                <label for="photoTitle">Titre de la photo :</label><br>
-                <input type="text" id="photoTitle" name="photoTitle"><br>
-
-                <label for="photoCategory">Catégorie :</label><br>
-                <select id="photoCategory" name="photoCategory">
-                    <option value=""></option>
-                    <option value="1">Objets</option>
-                    <option value="2">Appartements</option>
-                    <option value="3">Hotels</option>
-                </select><br>
-
-                <button type="submit" id="submitPhotoBtn">Valider</button>
-            </form>
-        </div>
+			<form action="upload.php" method="POST" id="secondPhotoForm" enctype="multipart/form-data">
+				<label id="label1" for="photoFile">
+					<input type="file" id="photoFile" name="photoFile" onchange="previewPhoto(event)">
+					<div class="upload-icon">
+						<img src="./Vector (1).png" alt="upload">
+						<button>+ Ajouter photo</button>
+						<p>jpg, png : 4mo max</p>
+					</div>
+					<img id="photoPreview" class="preview" src="#" alt="Aperçu de la photo" style="display: none;">
+				</label>
+				
+				<label for="photoTitle">Titre de la photo :</label><br>
+				<input type="text" id="photoTitle" name="photoTitle"><br>
+		
+				<label for="photoCategory">Catégorie :</label><br>
+				<select id="photoCategory" name="photoCategory">
+					<option value=""></option>
+					<option value="1">Objets</option>
+					<option value="2">Appartements</option>
+					<option value="3">Hotels</option>
+				</select><br>
+		
+				<button type="submit" id="submitPhotoBtn">Valider</button>
+			</form>
+		</div>
     </div>
 </div>
 

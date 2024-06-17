@@ -1,4 +1,4 @@
-// Récupérer les projets
+// Récupérer les images
 async function getProjects() {
     try {
         const response = await fetch("http://localhost:5678/api/works");
@@ -8,7 +8,9 @@ async function getProjects() {
         console.error('Error fetching projects:', error);
         return [];
     }
+    
 }
+
 
 // Récupérer les catégories
 async function getCategories() {
@@ -52,56 +54,45 @@ function renderProjects(projects) {
     }
 }
 
-// Mettre en place les filtres
-function setupFilters(projects) {
-    const filterAll = document.getElementById('tous');
-    const filterObjects = document.getElementById('objets');
-    const filterApartments = document.getElementById('appartements');
-    const filterHotels = document.getElementById('hotel');
+// Mettre en place les filtres dynamiquement
+async function setupFilters() {
+    const categories = await getCategories();
+    const filterContainer = document.querySelector('.categories');
 
-    if (filterAll) {
-        filterAll.addEventListener('click', (event) => {
-            event.preventDefault();
-            filterProjects('Tous', projects);
+    if (filterContainer) {
+        // Vider le conteneur de filtres existants
+        filterContainer.innerHTML = '';
+
+        // Ajouter le bouton de filtre "Tous"
+        const filterAll = document.createElement('div');
+        filterAll.innerText = 'Tous';
+        filterAll.id = 'tous';
+        filterAll.classList.add('filtre-button');
+        filterAll.addEventListener('click', () => {
+            filterProjects('Tous');
         });
-    }
+        filterContainer.appendChild(filterAll);
 
-    if (filterObjects) {
-        filterObjects.addEventListener('click', (event) => {
-            event.preventDefault();
-            filterProjectsByCategoryName('Objets', projects);
-        });
-    }
-
-    if (filterApartments) {
-        filterApartments.addEventListener('click', (event) => {
-            event.preventDefault();
-            filterProjectsByCategoryName('Appartements', projects);
-        });
-    }
-
-    if (filterHotels) {
-        filterHotels.addEventListener('click', (event) => {
-            event.preventDefault();
-            filterProjectsByCategoryName('Hotels & restaurants', projects);
+        // Ajouter les boutons de filtre pour chaque catégorie
+        categories.forEach(category => {
+            const filterButton = document.createElement('div');
+            filterButton.innerText = category.name;
+            filterButton.id = category.id; // Utiliser l'ID de la catégorie comme identifiant
+            filterButton.classList.add('filtre-button');
+            filterButton.addEventListener('click', () => {
+                filterProjects(category.id);
+            });
+            filterContainer.appendChild(filterButton);
         });
     }
 }
 
 // Filtrer les projets par ID de catégorie ou montrer tous les projets
-function filterProjects(categoryId, projects) {
-    const filteredProjects = categoryId === 'Tous' ? projects : projects.filter(project => project.category.id === categoryId);
-    renderProjects(filteredProjects);
-}
-
-// Filtrer les projets par nom de catégorie
-function filterProjectsByCategoryName(categoryName, projects) {
-    const category = projects.find(project => project.category.name === categoryName);
-    if (category) {
-        filterProjects(category.category.id, projects);
-    } else {
-        console.error(`Category "${categoryName}" not found`);
-    }
+function filterProjects(categoryId) {
+    getProjects().then(projects => {
+        const filteredProjects = categoryId === 'Tous' ? projects : projects.filter(project => project.category.id === categoryId);
+        renderProjects(filteredProjects);
+    });
 }
 
 // Afficher la première modale
@@ -327,4 +318,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     setupFormSubmission(); // Appel de la fonction pour configurer la soumission du formulaire
 });
 
+function previewPhoto(event) {
+    const input = event.target;
+    const preview = document.getElementById('photoPreview');
+
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            preview.src = e.target.result;
+            preview.style.display = 'block';
+            document.querySelector('#label1 .upload-icon').style.display = 'none';
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
 
