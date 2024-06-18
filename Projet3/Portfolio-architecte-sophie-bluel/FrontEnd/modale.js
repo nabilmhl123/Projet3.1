@@ -248,6 +248,14 @@ async function createNewWork(categoryValue, file, titleValue) {
     }
 }
 
+// Fonction pour déclencher le clic sur l'input file
+function triggerFileInput() {
+    const fileInput = document.getElementById('photoFile');
+    fileInput.click();
+}
+
+document.getElementById('buttonValider').addEventListener('click', triggerFileInput);
+
 // Écouteur d'événements pour soumettre le formulaire
 function setupFormSubmission() {
     const form = document.getElementById('secondPhotoForm');
