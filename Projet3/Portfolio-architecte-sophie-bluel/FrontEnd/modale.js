@@ -70,6 +70,7 @@ async function setupFilters() {
         filterAll.classList.add('filtre-button');
         filterAll.addEventListener('click', () => {
             filterProjects('Tous');
+            setActiveButton(filterAll);
         });
         filterContainer.appendChild(filterAll);
 
@@ -81,10 +82,32 @@ async function setupFilters() {
             filterButton.classList.add('filtre-button');
             filterButton.addEventListener('click', () => {
                 filterProjects(category.id);
+                setActiveButton(filterButton);
             });
             filterContainer.appendChild(filterButton);
         });
+
+        // Définir "Tous" comme bouton actif par défaut
+        setActiveButton(filterAll);
     }
+}
+
+// Fonction pour définir le bouton actif
+function setActiveButton(activeButton) {
+    // Enlever la classe 'active' de tous les boutons
+    const buttons = document.querySelectorAll('.filtre-button');
+    buttons.forEach(button => {
+        button.classList.remove('active');
+        // Réinitialiser les styles de tous les boutons
+        button.style.backgroundColor = '';
+        button.style.color = '';
+    });
+
+    // Ajouter la classe 'active' au bouton cliqué
+    activeButton.classList.add('active');
+    // Appliquer les styles pour le bouton actif
+    activeButton.style.backgroundColor = '#1D6154'; // Couleur d'arrière-plan active
+    activeButton.style.color = 'white'; // Couleur de texte active
 }
 
 // Filtrer les projets par ID de catégorie ou montrer tous les projets
@@ -174,7 +197,6 @@ function setupDeleteIcons() {
 // Fonction pour supprimer un projet
 async function deleteWorks(worksId) {
     try {
-        debugger
         let monToken = window.localStorage.getItem('authToken');
         console.log("Récupération du token:", monToken); // Ajout d'un log pour vérifier le token
 
@@ -216,8 +238,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 // Fonction pour soumettre le formulaire
 async function createNewWork(categoryValue, file, titleValue) {
     const token = window.localStorage.getItem('authToken');
-    const formData = new FormData();
-    debugger
+    const formData = new FormData();    
     console.log('Category:', categoryValue);
         console.log('Title:', titleValue);
         console.log('File:', file);
@@ -262,7 +283,6 @@ function setupFormSubmission() {
     form.addEventListener('submit', async (event) => {
         event.preventDefault(); // Empêcher le comportement par défaut du formulaire
         const fileInput = document.getElementById('photoFile');
-        debugger
         const categoryInput = document.getElementById('photoCategory');
         const titleInput = document.getElementById('photoTitle');
 

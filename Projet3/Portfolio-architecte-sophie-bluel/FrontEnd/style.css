@@ -131,8 +131,6 @@ h1 > span {
 
 .filtre-button#tous {
     width: auto;
-    background-color: #1D6154;
-    color: white;
 }
 
 .filtre-button#objets {
@@ -323,8 +321,8 @@ footer nav ul {
 .modal-btn {
     /* margin: 20px; */
     position: absolute;
-    right: 250px;
-    bottom: -138px;
+    right: 420px;
+    bottom: -72px;
     padding: 10px 20px;
     background-color: #FFFEF8;
     color: #000000;
@@ -591,4 +589,9 @@ form #submitPhotoBtn.enabled:hover {
     object-fit: cover; /* Redimensionner l'image pour remplir la zone */
     z-index: 1; /* Assurez-vous que l'image est en arrière-plan */
     display: none; /* Masquer l'image par défaut */
+}
+
+.filtre-button.active {
+    background-color: #1D6154; /* Changez cette couleur selon votre besoin */
+    color: white; /* Changez cette couleur selon votre besoin */
 }
