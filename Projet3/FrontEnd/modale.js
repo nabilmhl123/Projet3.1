@@ -7,7 +7,6 @@ async function getProjects() {
     } catch (error) {
         console.error('Error fetching projects:', error);
         return [];
-;
     }
 }
 
@@ -20,7 +19,6 @@ async function getCategories() {
     } catch (error) {
         console.error('Error fetching categories:', error);
         return [];
-;
     }
 }
 
@@ -28,7 +26,6 @@ async function getCategories() {
 function clearArea(area) {
     if (area) {
         area.innerHTML = "";
-;
     }
 }
 
@@ -45,7 +42,9 @@ function renderProjects(projects) {
 
 // Ajouter un projet à la galerie
 function addProjectToGallery(project) {
-    if (!project || !project.id) {
+    console.log('addProjectToGallery appelé avec:', project);
+
+    if (!project || !project.id || !project.categoryId || !project.imageUrl) {
         console.error('Projet invalide:', project);
         return;
     }
@@ -53,7 +52,7 @@ function addProjectToGallery(project) {
     const gallery = document.querySelector(".gallery");
     if (gallery) {
         const figure = document.createElement("figure");
-        figure.classList.add(`category-${project.category.id}`);
+        figure.classList.add(`category-${project.categoryId}`);
         figure.dataset.id = project.id;
 
         const img = document.createElement("img");
@@ -257,6 +256,8 @@ async function createNewWork(categoryValue, file, titleValue) {
     formData.append('image', file);
     formData.append('title', titleValue);
 
+    console.log('Données envoyées au serveur:', { categoryValue, file, titleValue });
+
     try {
         const response = await fetch('http://localhost:5678/api/works', {
             method: "POST",
@@ -306,34 +307,10 @@ function resetForm() {
     document.querySelector('#label1 .upload-icon').style.display = 'block';
 }
 
-// Ajouter un projet à la galerie
-function addProjectToGallery(project) {
-    if (!project || !project.id || !project.category || !project.imageUrl) {
-        console.error('Projet invalide:', project);
-        return;
-    }
-
-    const gallery = document.querySelector(".gallery");
-    if (gallery) {
-        const figure = document.createElement("figure");
-        figure.classList.add(`category-${project.category.id}`);
-        figure.dataset.id = project.id;
-
-        const img = document.createElement("img");
-        img.src = project.imageUrl;
-
-        const caption = document.createElement("figcaption");
-        caption.innerText = project.title;
-
-        figure.appendChild(img);
-        figure.appendChild(caption);
-        gallery.appendChild(figure);
-        console.log('Image ajoutée à la galerie:', project);
-    }
-}
-
 // Ajouter un projet à la modale
 function addProjectToModal(project) {
+    console.log('addProjectToModal appelé avec:', project);
+
     if (!project || !project.id || !project.imageUrl) {
         console.error('Projet invalide:', project);
         return;
@@ -439,7 +416,7 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener("DOMContentLoaded", async () => {
     const projects = await getProjects();
     renderProjects(projects);
-    setupFilters(projects);
+    setupFilters();
 });
 
 function previewPhoto(event) {
